@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: skalak-ai
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    healthCheckPath: /health
+    envVars:
+      - key: FLASK_SECRET_KEY
+        generateValue: true
+      - key: WAVE_API_KEY
+        sync: false
+      - key: API_FOOTBALL_KEY
+        sync: false
+      - key: ADMIN_TOKEN
+        generateValue: true
+      - key: MOOV_PAYMENT_INSTRUCTIONS
+        value: "Contactez l’administrateur pour les modalités de paiement Moov Money."
